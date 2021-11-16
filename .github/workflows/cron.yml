@@ -22,7 +22,7 @@ jobs:
         rm ./test/generated/*.abap
         node index.mjs https://raw.githubusercontent.com/abap-openapi/sap-event-mesh-openapi/main/src/messaging.json em_messaging
         ls
-        cp ./test/generated/*.abap ../generated-sap-event-mesh-openapi/
+        cp ./test/generated/*.abap ../generated-sap-event-mesh-openapi/src/
         ls
         git status
     - name: Push
