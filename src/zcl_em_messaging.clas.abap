@@ -72,12 +72,12 @@ CLASS zcl_em_messaging IMPLEMENTATION.
     CASE lv_code.
       WHEN 204. " No Content, message published successfully
       WHEN 400. " Bad Request
-" application/json, #/components/schemas/ErrorMessage
+" application/json,#/components/schemas/ErrorMessage
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_errormessage( '' ).
 " todo, raise
       WHEN 404. " Not Found
-" application/json, #/components/schemas/ErrorMessage
+" application/json,#/components/schemas/ErrorMessage
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_errormessage( '' ).
 " todo, raise
@@ -97,7 +97,7 @@ CLASS zcl_em_messaging IMPLEMENTATION.
     CASE lv_code.
       WHEN 204. " No Content, message published successfully
       WHEN 400. " Bad Request
-" application/json, #/components/schemas/ErrorMessage
+" application/json,#/components/schemas/ErrorMessage
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_errormessage( '' ).
 " todo, raise
@@ -115,10 +115,10 @@ CLASS zcl_em_messaging IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 200. " Ok
-" application/json, 
+" application/json,
       WHEN 204. " No Content, queue is empty
       WHEN 404. " Not Found
-" application/json, #/components/schemas/ErrorMessage
+" application/json,#/components/schemas/ErrorMessage
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_errormessage( '' ).
 " todo, raise
@@ -139,7 +139,7 @@ CLASS zcl_em_messaging IMPLEMENTATION.
       WHEN 202. " Accepted
 " todo, raise
       WHEN 400. " Bad Request
-" application/json, #/components/schemas/ErrorMessage
+" application/json,#/components/schemas/ErrorMessage
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_errormessage( '' ).
 " todo, raise
@@ -157,17 +157,17 @@ CLASS zcl_em_messaging IMPLEMENTATION.
     WRITE / lv_code.
     CASE lv_code.
       WHEN 202. " Accepted
-" application/json, #/components/schemas/response_create_subscription
+" application/json,#/components/schemas/response_create_subscription
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_create_subscription( '' ).
 " todo, raise
       WHEN 400. " Bad Request
-" application/json, #/components/schemas/ErrorMessage
+" application/json,#/components/schemas/ErrorMessage
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_errormessage( '' ).
 " todo, raise
       WHEN 409. " Conflict
-" application/json, #/components/schemas/ErrorMessage
+" application/json,#/components/schemas/ErrorMessage
         CREATE OBJECT mo_json EXPORTING iv_json = mi_client->response->get_cdata( ).
         parse_errormessage( '' ).
 " todo, raise
