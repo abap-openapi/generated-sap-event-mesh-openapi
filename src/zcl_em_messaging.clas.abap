@@ -42,7 +42,7 @@ CLASS zcl_em_messaging IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD parse_qos.
-* todo, handle type number
+    qos = mo_json->value_integer( iv_prefix && '/' ).
   ENDMETHOD.
 
   METHOD parse_create_subscription.

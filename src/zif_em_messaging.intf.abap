@@ -7,8 +7,8 @@ INTERFACE zif_em_messaging PUBLIC.
            message TYPE string,
          END OF errormessage.
 
-* Component schema: QOS, number
-  TYPES qos TYPE f.
+* Component schema: QOS, integer
+  TYPES qos TYPE i.
 
 * Component schema: bodycreate_subscription, object
   TYPES: BEGIN OF subbodycreate_subscription_pus,
@@ -31,7 +31,6 @@ INTERFACE zif_em_messaging PUBLIC.
 * POST - "Publish message to a queue"
 * Operation id: publish-message-to-queue
 * Parameter: queue-name, required, path
-* Parameter: content-type, required, header
 * Parameter: x-qos, required, header
 * Parameter: x-message-expiration, optional, header
 * Response: 204
@@ -43,16 +42,14 @@ INTERFACE zif_em_messaging PUBLIC.
   METHODS publish_message_to_queue
     IMPORTING
       queue_name TYPE string
-      content_type TYPE string DEFAULT 'application/json'
       x_qos TYPE string
-      x_message_expiration TYPE f OPTIONAL
+      x_message_expiration TYPE i OPTIONAL
       body TYPE string
     RAISING cx_static_check.
 
 * POST - "Publish message to a topic"
 * Operation id: publish-message-to-topic
 * Parameter: topic-name, required, path
-* Parameter: content-type, required, header
 * Parameter: x-qos, required, header
 * Parameter: x-message-expiration, optional, header
 * Response: 204
@@ -62,9 +59,8 @@ INTERFACE zif_em_messaging PUBLIC.
   METHODS publish_message_to_topic
     IMPORTING
       topic_name TYPE string
-      content_type TYPE string DEFAULT 'application/json'
       x_qos TYPE string
-      x_message_expiration TYPE f OPTIONAL
+      x_message_expiration TYPE i OPTIONAL
       body TYPE string
     RAISING cx_static_check.
 
@@ -98,7 +94,6 @@ INTERFACE zif_em_messaging PUBLIC.
 
 * POST - "Create subscription"
 * Operation id: create-subscription
-* Parameter: content-type, required, header
 * Response: 202
 *     application/json, #/components/schemas/response_create_subscription
 * Response: 400
@@ -108,7 +103,6 @@ INTERFACE zif_em_messaging PUBLIC.
 * Body ref: #/components/schemas/bodycreate_subscription
   METHODS create_subscription
     IMPORTING
-      content_type TYPE string DEFAULT 'application/json'
       body TYPE bodycreate_subscription
     RAISING cx_static_check.
 
