@@ -42,7 +42,7 @@ INTERFACE zif_em_messaging PUBLIC.
   METHODS publish_message_to_queue
     IMPORTING
       queue_name TYPE string
-      x_qos TYPE string
+      x_qos TYPE qos
       x_message_expiration TYPE i OPTIONAL
       body TYPE string
     RAISING cx_static_check.
@@ -59,7 +59,7 @@ INTERFACE zif_em_messaging PUBLIC.
   METHODS publish_message_to_topic
     IMPORTING
       topic_name TYPE string
-      x_qos TYPE string
+      x_qos TYPE qos
       x_message_expiration TYPE i OPTIONAL
       body TYPE string
     RAISING cx_static_check.
@@ -76,7 +76,7 @@ INTERFACE zif_em_messaging PUBLIC.
   METHODS consume_from_queue
     IMPORTING
       queue_name TYPE string
-      x_qos TYPE string
+      x_qos TYPE qos
     RAISING cx_static_check.
 
 * POST - "Acknowledge message consumption"
