@@ -63,9 +63,13 @@ CLASS zcl_em_messaging IMPLEMENTATION.
     DATA lv_code TYPE i.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/messagingrest/v1/queues/{queue-name}/messages'.
-    REPLACE ALL OCCURRENCES OF '{queue-name}' IN lv_uri WITH queue_name.
+    lv_temp = queue_name.
+    lv_temp = cl_http_utility=>escape_url( condense( lv_temp ) ).
+    REPLACE ALL OCCURRENCES OF '{queue-name}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_header_field( name = 'x-qos' value = x_qos ).
+    mi_client->request->set_header_field( name = 'x-message-expiration' value = x_message_expiration ).
     mi_client->request->set_cdata( body ).
     lv_code = send_receive( ).
     WRITE / lv_code.
@@ -88,9 +92,13 @@ CLASS zcl_em_messaging IMPLEMENTATION.
     DATA lv_code TYPE i.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/messagingrest/v1/topics/{topic-name}/messages'.
-    REPLACE ALL OCCURRENCES OF '{topic-name}' IN lv_uri WITH topic_name.
+    lv_temp = topic_name.
+    lv_temp = cl_http_utility=>escape_url( condense( lv_temp ) ).
+    REPLACE ALL OCCURRENCES OF '{topic-name}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_header_field( name = 'x-qos' value = x_qos ).
+    mi_client->request->set_header_field( name = 'x-message-expiration' value = x_message_expiration ).
     mi_client->request->set_cdata( body ).
     lv_code = send_receive( ).
     WRITE / lv_code.
@@ -108,9 +116,12 @@ CLASS zcl_em_messaging IMPLEMENTATION.
     DATA lv_code TYPE i.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/messagingrest/v1/queues/{queue-name}/messages/consumption'.
-    REPLACE ALL OCCURRENCES OF '{queue-name}' IN lv_uri WITH queue_name.
+    lv_temp = queue_name.
+    lv_temp = cl_http_utility=>escape_url( condense( lv_temp ) ).
+    REPLACE ALL OCCURRENCES OF '{queue-name}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
+    mi_client->request->set_header_field( name = 'x-qos' value = x_qos ).
     lv_code = send_receive( ).
     WRITE / lv_code.
     CASE lv_code.
@@ -129,8 +140,12 @@ CLASS zcl_em_messaging IMPLEMENTATION.
     DATA lv_code TYPE i.
     DATA lv_temp TYPE string.
     DATA lv_uri TYPE string VALUE '/messagingrest/v1/queues/{queue-name}/messages/{message-id}/acknowledgement'.
-    REPLACE ALL OCCURRENCES OF '{queue-name}' IN lv_uri WITH queue_name.
-    REPLACE ALL OCCURRENCES OF '{message-id}' IN lv_uri WITH message_id.
+    lv_temp = queue_name.
+    lv_temp = cl_http_utility=>escape_url( condense( lv_temp ) ).
+    REPLACE ALL OCCURRENCES OF '{queue-name}' IN lv_uri WITH lv_temp.
+    lv_temp = message_id.
+    lv_temp = cl_http_utility=>escape_url( condense( lv_temp ) ).
+    REPLACE ALL OCCURRENCES OF '{message-id}' IN lv_uri WITH lv_temp.
     mi_client->request->set_method( 'POST' ).
     mi_client->request->set_header_field( name = '~request_uri' value = lv_uri ).
     lv_code = send_receive( ).
